@@ -1,0 +1,18 @@
+#
+# Run Roundcube as a sub-domain virtual host.
+#
+location / {
+    root    /usr/share/phpldapadmin;
+    index   index.php index.html;
+    include /etc/nginx/templates/hsts.tmpl;
+}
+
+location ~ \.php$ {
+    root            /usr/share/phpldapadmin;
+
+    include /etc/nginx/templates/fastcgi_php.tmpl;
+
+    fastcgi_param SCRIPT_FILENAME /usr/share/phpldapadmin$fastcgi_script_name;
+}
+
+location ~ ^/(VERSION)$ { deny all; }

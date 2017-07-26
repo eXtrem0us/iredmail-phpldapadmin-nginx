@@ -1,0 +1,13 @@
+# PHP LDAP Admin
+location ~ ^/phpldapadmin(.*)\.php$ {
+    include /etc/nginx/templates/hsts.tmpl;
+    include /etc/nginx/templates/fastcgi_php.tmpl;
+    fastcgi_param SCRIPT_FILENAME /usr/share/phpldapadmin$1.php;
+}
+
+location ~ ^/phpldapadmin(.*) {
+    alias /usr/share/phpldapadmin$1;
+    index index.php;
+}
+
+location ~ ^/(VERSION)$ { deny all; }
